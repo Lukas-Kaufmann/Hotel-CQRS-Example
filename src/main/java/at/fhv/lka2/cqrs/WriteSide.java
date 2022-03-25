@@ -1,4 +1,4 @@
-package at.fhv.lab1reference;
+package at.fhv.lka2.cqrs;
 
 import eventside.domain.Event;
 import org.springframework.beans.factory.annotation.Autowired;

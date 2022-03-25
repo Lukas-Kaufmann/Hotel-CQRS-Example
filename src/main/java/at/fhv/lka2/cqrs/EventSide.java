@@ -1,4 +1,4 @@
-package at.fhv.lab1reference;
+package at.fhv.lka2.cqrs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
