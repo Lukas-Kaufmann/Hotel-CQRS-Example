@@ -1,5 +1,11 @@
 package writeside.domain.model;
 
+import eventside.domain.Event;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import writeside.EventPublisher;
+import writeside.domain.model.event.BookingCreatedEvent;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +23,10 @@ public class Booking {
         this.start = start;
         this.end = end;
         this.roomNumber = roomNumber;
+
+        Event event = new BookingCreatedEvent(bookingNumber, roomNumber, customerName, start, end);
+        EventPublisher eventPublisher = new EventPublisher();
+        eventPublisher.publishEvent(event);
     }
 
     public boolean isWithinPeriod(LocalDate periodStart, LocalDate periodEnd) {
@@ -26,11 +36,7 @@ public class Booking {
         if (start.isAfter(periodStart ) && start.isBefore(periodEnd)) {
             return true;
         }
-        if (end.isAfter(periodStart) && end.isBefore(periodEnd)) {
-            return true;
-        }
-
-        return false;
+        return end.isAfter(periodStart) && end.isBefore(periodEnd);
     }
 
 

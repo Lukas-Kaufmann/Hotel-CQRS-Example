@@ -16,7 +16,6 @@ public class EventPublisher {
     }
 
     public Boolean publishEvent(Event event) {
-        System.out.println(event);
         return localApiClient
                 .post()
                 .uri("/event/")

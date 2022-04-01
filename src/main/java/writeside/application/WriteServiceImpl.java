@@ -1,9 +1,12 @@
 package writeside.application;
 
+import eventside.domain.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import writeside.EventPublisher;
 import writeside.domain.model.Booking;
 import writeside.domain.model.Room;
+import writeside.domain.model.event.BookingCanceledEvent;
 import writeside.domain.repository.BookingRepository;
 import writeside.domain.repository.RoomRepository;
 
@@ -45,14 +48,16 @@ public class WriteServiceImpl implements WriteService {
         Booking booking = new Booking(bookingNumber, customerName, start, end, roomNumber);
         bookingRepository.add(booking);
 
-        //TODO event
-
         return bookingNumber;
     }
 
     @Override
     public boolean cancelBooking(String bookingNumber) {
         bookingRepository.removeBooking(bookingNumber);
+
+        Event event = new BookingCanceledEvent(bookingNumber);
+        EventPublisher eventPublisher = new EventPublisher();
+        eventPublisher.publishEvent(event);
 
         //TODO create event
         return true;

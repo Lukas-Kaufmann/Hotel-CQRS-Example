@@ -1,41 +1,26 @@
 package eventside.domain;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import writeside.domain.model.event.BookingCanceledEvent;
+import writeside.domain.model.event.BookingCreatedEvent;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value= BookingCanceledEvent.class, name = "bookingCanceled"),
+        @JsonSubTypes.Type(value = BookingCreatedEvent.class, name = "bookingCreated"),
+})
 public class Event {
-
-    private String customer;
-    private long timestamp;
-    private String content;
-
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
+    protected long timestamp;
 
     public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "customer='" + customer + '\'' +
-                ", timestamp=" + timestamp +
-                ", content='" + content + '\'' +
-                '}';
+    public Event() {
+        this.timestamp = System.currentTimeMillis();
     }
 }

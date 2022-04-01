@@ -20,6 +20,12 @@ public class MemoryRepository implements BookingRepository, RoomRepository {
         this.bookings = new LinkedList<>();
         //TODO dummy data
 
+        this.rooms.add(new Room("L001", 2, new LinkedList<>()));
+        this.rooms.add(new Room("L002", 2, new LinkedList<>()));
+        this.rooms.add(new Room("L003", 2, new LinkedList<>()));
+        this.rooms.add(new Room("L004", 2, new LinkedList<>()));
+        this.rooms.add(new Room("L005", 2, new LinkedList<>()));
+
     }
 
     private int largestBookingNumber = 1;

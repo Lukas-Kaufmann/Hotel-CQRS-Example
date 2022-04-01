@@ -22,14 +22,14 @@ public class WriteSide {
         SpringApplication.run(WriteSide.class, args);
     }
 
-    @Bean
-    public CommandLineRunner run() throws Exception {
-        return args -> {
-            Event event = new Event();
-            event.setContent("This is the content!");
-            event.setCustomer("Customer1");
-            event.setTimestamp(System.currentTimeMillis());
-            System.out.println("Result: " + publisher.publishEvent(event));
-        };
-    }
+//    @Bean
+//    public CommandLineRunner run() throws Exception {
+//        return args -> {
+//            Event event = new Event();
+//            event.setContent("This is the content!");
+//            event.setCustomer("Customer1");
+//            event.setTimestamp(System.currentTimeMillis());
+//            System.out.println("Result: " + publisher.publishEvent(event));
+//        };
+//    }
 }
