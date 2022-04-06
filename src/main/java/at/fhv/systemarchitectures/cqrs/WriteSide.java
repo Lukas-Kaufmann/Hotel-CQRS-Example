@@ -1,11 +1,8 @@
-package at.fhv.lka2.cqrs;
+package at.fhv.systemarchitectures.cqrs;
 
-import eventside.domain.Event;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import writeside.EventPublisher;

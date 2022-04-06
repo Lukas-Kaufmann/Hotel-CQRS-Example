@@ -1,4 +1,4 @@
-package at.fhv.lka2.cqrs;
+package at.fhv.systemarchitectures.cqrs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

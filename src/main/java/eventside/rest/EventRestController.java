@@ -38,7 +38,6 @@ public class EventRestController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        //TODO send state of events
         return false;
     }
 
