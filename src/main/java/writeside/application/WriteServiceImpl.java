@@ -11,6 +11,7 @@ import writeside.domain.repository.BookingRepository;
 import writeside.domain.repository.RoomRepository;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ public class WriteServiceImpl implements WriteService {
 
     @Override
     public String book(String roomNumber, String customerName, LocalDate start, LocalDate end) {
-        Room room = roomRepository.roomByRoomNumber(roomNumber).orElseThrow(IllegalStateException::new);
+        Room room = roomRepository.roomByRoomNumber(roomNumber).orElse(new Room("Default", Collections.EMPTY_LIST));
 
         List<Booking> bookingsOfRoom = room.getBookingNumbers().stream().map(
                 number -> bookingRepository.bookingByNumber(number).orElseThrow(IllegalStateException::new))
@@ -53,9 +54,12 @@ public class WriteServiceImpl implements WriteService {
 
     @Override
     public boolean cancelBooking(String bookingNumber) {
-        bookingRepository.removeBooking(bookingNumber);
+        Booking booking = bookingRepository.bookingByNumber(bookingNumber).orElseThrow(IllegalStateException::new);
 
-        Event event = new BookingCanceledEvent(bookingNumber);
+
+        Event event = new BookingCanceledEvent(bookingNumber, booking.getStart(), booking.getEnd());
+
+        bookingRepository.removeBooking(bookingNumber);
         EventPublisher eventPublisher = new EventPublisher();
         eventPublisher.publishEvent(event);
 
