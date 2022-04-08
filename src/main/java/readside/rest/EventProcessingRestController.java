@@ -24,7 +24,7 @@ public class EventProcessingRestController {
     private EventProcessingApplicationService eventProcessingApplicationService;
 
     @GetMapping(value = "/subscribeHelper")
-    void subscribeTo() {
+    public boolean subscribeTo() {
         WebClient webClient = WebClient.create("http://localhost:8080");
         webClient.post()
                 .uri("/subscribe/localhost/8082/to/" + BookingCreatedEvent.class.toString())
@@ -37,6 +37,8 @@ public class EventProcessingRestController {
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
+
+        return true;
     }
 
     @PostMapping(value= "/processEvent/")

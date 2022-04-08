@@ -2,7 +2,11 @@
 
 ### Starten
 
-Starten der Main-methoden in at.fhv.lka2
+Starten der Main-methoden in at.fhv.systemarchitectures.cqrs - Reihenfolge egal
+Starten der Main-methoden über IDE empfohlen, kein executable jar generiert.
+
+Das [Scenario](./src/test/java/scenario/WriteSideScenario.java) zeigt eine möglicher Ablauf von operationen auf dem System.
+Wenn dass scenario nicht gestartet wird ist es nötig manuel den Enpoint [http://localhost:8082/subscribeHelper](http://localhost:8082/subscribeHelper) aufzurufen.
 
 
 ## Verwendung
@@ -20,5 +24,15 @@ Nachdem subscribed wurde erhält die Readside die Events.
 *yyyy-MM-dd* einzugeben. Diese Parameter sind bei den Endpoints *<readside>/availableRooms* *<readside>/bookings* und
 *<write-side>/booking/room*
 
+## System model
+[see picture](./system_model.png)
+
+
 ## Designanmerkungen
-- TODO
+- Readside kann sich zu jedem event subscriben und bei neuen subscribern werden vorherige events nach dem subscriben gesendet --> weil wir das ausprobieren wollten
+- Entschieden für subclassing einer abstrakten event-Klasse -> subscriber können sich zu einzelnen konkreten Eventklassen 
+subscriben -> dadurch folgt dass jedes event alle informationen zur verarbeitung beinhalten muss
+- auf der Readside wurde, damit der vorteil von CQRS ausgenutzt wird ein stark verändertes model für die Query zur abfrage
+der verfügbaren Räume eingesetzt. d.h. es wird direkt gespeichert wieviele Räume sind an jedem Tag noch verfügbar, dadurch kann die anzahl ohne viel verarbeitungsaufwand abgelesen werden.
+
+

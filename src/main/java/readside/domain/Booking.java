@@ -15,6 +15,9 @@ public class Booking {
         this.end = end;
     }
 
+    public Booking() {
+    }
+
     public String getBookingNumber() {
         return bookingNumber;
     }
