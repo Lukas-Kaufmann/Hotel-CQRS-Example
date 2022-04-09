@@ -3,7 +3,7 @@
 ### Starten
 
 Starten der Main-methoden in at.fhv.systemarchitectures.cqrs - Reihenfolge egal
-Starten der Main-methoden über IDE empfohlen, kein executable jar generiert.
+Starten der Main-methoden über IDE empfohlen.
 
 Das [Scenario](./src/test/java/scenario/WriteSideScenario.java) zeigt eine möglicher Ablauf von operationen auf dem System.
 Wenn dass scenario nicht gestartet wird ist es nötig manuel den Enpoint [http://localhost:8082/subscribeHelper](http://localhost:8082/subscribeHelper) aufzurufen.
@@ -11,8 +11,9 @@ Wenn dass scenario nicht gestartet wird ist es nötig manuel den Enpoint [http:/
 
 ## Verwendung
 Wir empfehlen die Verwendung der Swagger-UI zum bedienen der Lösung, da keine andere Methode implementiert wurde.
-Zu finden sind diese unter [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
-und [http://localhost:8082/swagger-ui/index.html](http://localhost:8082/swagger-ui/index.html).
+Zu finden sind diese unter [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html) für WriteSide und
+und [http://localhost:8082/swagger-ui/index.html](http://localhost:8082/swagger-ui/index.html) für Readside. EventSide wäre auf port 8080 
+verfügbar ist allerdings nicht nötig für die Verwendung.
 
 Nachdem die Komponenten gestartet wurden, muss die [localhost:8082/subscribeHelper]("http://localhost:8082/subscribeHelper"), auf der Readside, aufgerufen werden.
 Dadurch subscribed die Readside sich bei der Event-side.
